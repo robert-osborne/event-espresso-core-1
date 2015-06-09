@@ -1274,7 +1274,7 @@ class Registrations_Admin_Page extends EE_Admin_Page_CPT {
 			$route = array_merge( $this->_req_data, $route );
 		}
 
-		$this->_redirect_after_action( FALSE, '', '', $route, TRUE );
+		$this->_redirect_after_action( $success, '', '', $route, TRUE );
 	}
 
 
@@ -1284,12 +1284,8 @@ class Registrations_Admin_Page extends EE_Admin_Page_CPT {
 	 * @return void
 	 */
 	protected function _change_reg_status() {
-		$success = FALSE;
 		$this->_req_data['return'] = 'view_registration';
-		if ( !isset( $this->_req_data['_reg_status_id'] ) ) {
-			$result['success'] = FALSE;
-			$this->_reg_status_change_return( '', $result );
-		}
+		$this->_req_data[ '_reg_status_id' ] = isset( $this->_req_data[ '_reg_status_id' ] ) ? $this->_req_data[ '_reg_status_id' ] : '';
 
 		switch ( $this->_req_data['_reg_status_id'] ) {
 			case EEH_Template::pretty_status( EEM_Registration::status_id_approved, FALSE, 'sentence' ) :
