@@ -525,7 +525,7 @@ class EE_SPCO_Reg_Step_Attendee_Information extends EE_SPCO_Reg_Step {
 						}
 					}
 				}
-				$state_options = apply_filters( 'FHEE__EE_SPCO_Reg_Step_Attendee_Information___generate_question_input__state_options', $state_options, $this, $registration, $question, $answer );
+				$state_options = apply_filters( 'FHEE__EE_SPCO_Reg_Step_Attendee_Information___generate_question_input__state_options', $state_options, $this );
 				return new EE_State_Select_Input( $state_options, $input_constructor_args );
 				break;
 			// Country Dropdown
@@ -540,7 +540,7 @@ class EE_SPCO_Reg_Step_Attendee_Information extends EE_SPCO_Reg_Step {
 						}
 					}
 				}
-				$country_options = apply_filters( 'FHEE__EE_SPCO_Reg_Step_Attendee_Information___generate_question_input__country_options', $country_options, $this, $registration, $question, $answer );
+				$country_options = apply_filters( 'FHEE__EE_SPCO_Reg_Step_Attendee_Information___generate_question_input__country_options', $country_options, $this );
 				return new EE_Country_Select_Input( $country_options, $input_constructor_args );
 				break;
 			// Checkboxes
@@ -553,11 +553,7 @@ class EE_SPCO_Reg_Step_Attendee_Information extends EE_SPCO_Reg_Step {
 				break;
 			// fallback
 			default :
-				$default_input = apply_filters( 'FHEE__EE_SPCO_Reg_Step_Attendee_Information___generate_question_input__default', null, $question->type(), $question, $input_constructor_args );
-				if( ! $default_input ){
-					$default_input = new EE_Text_Input( $input_constructor_args );
-				}
-				return $default_input;
+				return new EE_Text_Input( $input_constructor_args );
 		}
 	}
 
@@ -849,14 +845,12 @@ class EE_SPCO_Reg_Step_Attendee_Information extends EE_SPCO_Reg_Step {
 		} elseif ( $answer_is_obj ) {
 			// save this data to the answer object
 			$answers[ $answer_cache_id ]->set_value( $input_value );
-			$result = $answers[ $answer_cache_id ]->save();
-			return $result !== false ? true : false;
+			return $answers[ $answer_cache_id ]->save();
 		} else {
 			foreach ( $answers as $answer ) {
 				if ( $answer instanceof EE_Answer && $answer->question_ID() == $answer_cache_id ) {
 					$answer->set_value( $input_value );
-					$result = $answer->save();
-					return $result !== false ? true : false;
+					return $answer->save() !== FALSE ? TRUE : FALSE;
 				}
 			}
 		}

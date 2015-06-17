@@ -313,12 +313,7 @@ abstract class EE_Form_Section_Base {
 		if ( ! empty( $method )) {
 			$this->set_method( $method );
 		}
-		$html = EEH_HTML::nl( 1, 'form' ) . '<form';
-		$html .= $this->html_id() !== '' ? ' id="' . $this->html_id() . '"' : '';
-		$html .= ' action="' . $this->action() . '"';
-		$html .= ' method="' . $this->method() . '"';
-		$html .= $other_attributes . '>';
-		return $html;
+		return EEH_HTML::nl( 1, 'form' ) . '<form id="' . $this->html_id() . '" action="' . $this->action() . '" method="' . $this->method() . '"' . $other_attributes . '>';
 	}
 
 

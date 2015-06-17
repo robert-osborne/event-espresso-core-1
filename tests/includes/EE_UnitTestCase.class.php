@@ -591,12 +591,7 @@ class EE_UnitTestCase extends WP_UnitTestCase {
 	 * @return EE_Ticket
 	 */
 	public function new_ticket( $options = array() ) {
-		// grab ticket price or set to default of 16.50
-		$ticket_price = isset( $options[ 'ticket_price' ] ) && is_numeric( $options[ 'ticket_price' ] ) ? $options[ 'ticket_price' ] : 16.5;
-		// apply taxes? default = true
-		$ticket_taxable = isset( $options[ 'ticket_taxable' ] ) ? filter_var( $options[ 'ticket_taxable' ], FILTER_VALIDATE_BOOLEAN ) : true;
-		/** @type EE_Ticket $ticket */
-		$ticket = $this->new_model_obj_with_dependencies('Ticket', array( 'TKT_price' => $ticket_price, 'TKT_taxable' => $ticket_taxable ) );
+		$ticket = $this->new_model_obj_with_dependencies('Ticket', array( 'TKT_price' => '16.5', 'TKT_taxable' => TRUE ) );
 		$base_price_type = EEM_Price_Type::instance()->get_one( array( array('PRT_name' => 'Base Price' ) ) );
 		$this->assertInstanceOf( 'EE_Price_Type', $base_price_type );
 		$base_price = $this->new_model_obj_with_dependencies( 'Price', array( 'PRC_amount' => 10, 'PRT_ID' => $base_price_type->ID() ) );
@@ -616,8 +611,11 @@ class EE_UnitTestCase extends WP_UnitTestCase {
 			$ticket->_add_relation_to( $percent_surcharge, 'Price' );
 			$this->assertArrayContains( $percent_surcharge, $ticket->prices() );
 		}
-		// set datetimes, default = 1
-		$datetimes = isset( $options[ 'datetimes' ] ) ? $options[ 'datetimes' ] : 1;
+		if( isset( $options[ 'datetimes'] ) ){
+			$datetimes = $options[ 'datetimes' ];
+		}else{
+			$datetimes = 1;
+		}
 
 		$event = $this->new_model_obj_with_dependencies( 'Event' );
 		for( $i = 0; $i <= $datetimes; $i++ ){

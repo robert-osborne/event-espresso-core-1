@@ -285,7 +285,6 @@ class EE_Payment extends EE_Base_Class implements EEI_Payment{
 	/**
 	 *        get Payment Amount
 	 * @access        public
-	 * @return float
 	 */
 	public function amount() {
 		return $this->get( 'PAY_amount' );
@@ -483,16 +482,6 @@ class EE_Payment extends EE_Base_Class implements EEI_Payment{
 	 */
 	public function is_failed() {
 		return $this->status_is( EEM_Payment::status_id_failed );
-	}
-
-
-
-	/**
-	 * For determining if the payment is actually a refund ( ie: has a negative value )
-	 * @return boolean
-	 */
-	public function is_a_refund() {
-		return $this->amount() < 0 ? true : false;
 	}
 
 

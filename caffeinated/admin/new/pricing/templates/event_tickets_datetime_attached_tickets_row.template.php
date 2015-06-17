@@ -49,18 +49,13 @@
 						</tr>
 					</tbody>
 				</table>
-				<div class="ee-editor-footer-container">
-					<div class="ee-editor-id-container">
-						<span class="ee-item-id"><?php echo $DTT_ID ? 'Datetime ID: ' . $DTT_ID : ''; ?></span>
-					</div>
-					<div class="save-cancel-button-container">
-						<button data-context="short-ticket" data-datetime-row="<?php echo $dtt_row; ?>" class="button-primary ee-create-button">
-							<?php _e('Create Ticket', 'event_espresso'); ?>
-						</button>
-						<button data-context="short-ticket" data-datetime-row="<?php echo $dtt_row; ?>" class="button-secondary ee-cancel-button add-edit">
-							<?php _e('Close', 'event_espresso'); ?>
-						</button>
-					</div>
+				<div class="save-cancel-button-container">
+					<button data-context="short-ticket" data-datetime-row="<?php echo $dtt_row; ?>" class="button-primary ee-create-button">
+						<?php _e('Create Ticket', 'event_espresso'); ?>
+					</button>
+					<button data-context="short-ticket" data-datetime-row="<?php echo $dtt_row; ?>" class="button-secondary ee-cancel-button add-edit">
+						<?php _e('Close', 'event_espresso'); ?>
+					</button>
 				</div>
 				<div style="clear:both"></div>
 			</div>
@@ -78,5 +73,4 @@
  * $show_tickets_row
  * $datetime_tickets_list
  * $add_new_datetime_ticket_help_link
- * $DTT_ID
  */

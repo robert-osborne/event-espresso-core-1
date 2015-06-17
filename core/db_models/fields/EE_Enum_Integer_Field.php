@@ -45,10 +45,10 @@ class EE_Enum_Integer_Field extends EE_Integer_Field{
 					implode( ', ', array_keys( $this->_allowed_enum_values )),
 					$value_inputted_for_field_on_model_object
 				);
-				 EE_Error::add_error("$msg||$msg2", __FILE__, __FUNCTION__, __LINE__ );
+				throw new EE_Error("$msg||$msg2");
+			}else{
+				return $this->get_default_value();
 			}
-			return $this->get_default_value();
-
 		}
 		return intval($value_inputted_for_field_on_model_object);
 	}

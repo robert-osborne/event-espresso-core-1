@@ -44,9 +44,7 @@ class EED_Ticket_Selector_Caff  extends EED_Ticket_Selector {
 
 
 	//just required because of abstract declaration
-	public function run( $WP ) {
-		$this->set_config();
-	}
+	public function run( $WP ) {}
 
 
 
